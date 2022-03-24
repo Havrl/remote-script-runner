@@ -1,0 +1,51 @@
+<div class="container">
+  <h4 class="title">Settings</h4>
+
+  <div class="toast toast-{{ toast.type }}" *ngIf="toast">
+    <button class="btn btn-clear float-right" (click)="deleteToast()"></button>
+    {{ toast.message }}
+  </div>
+
+  <form [formGroup]="settingsForm" (ngSubmit)="save()" novalidate>
+
+      <div class="form-group" [ngClass]="{'has-error': serverName.invalid && (serverName.dirty || serverName.touched)}">
+        <label class="form-label" for="serverName">Server name</label>
+        <input type="text" class="form-input" id="serverName" formControlName="serverName" />
+        <div class="error-group" *ngIf="serverName.invalid && (serverName.dirty || serverName.touched)">
+          <p class="form-input-hint" *ngIf="serverName.errors?.['required']">
+            Server name is required.
+          </p>
+          <p class="form-input-hint" *ngIf="serverName.errors?.['maxlength']">
+            Server name must be at most 50 characters long.
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': scriptsPath.invalid && (scriptsPath.dirty || scriptsPath.touched)}">
+        <label class="form-label" for="scriptsPath">Scripts path</label>
+        <input type="text" class="form-input" id="scriptsPath" formControlName="scriptsPath" />
+        <div class="error-group" *ngIf="scriptsPath.invalid && (scriptsPath.dirty || scriptsPath.touched)">
+          <p class="form-input-hint" *ngIf="scriptsPath.errors?.['required']">
+            Scripts path is required.
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group" [ngClass]="{'has-error': scripts.invalid && (scripts.dirty || scripts.touched)}">
+        <label class="form-label" for="scripts">Scripts</label>
+        <textarea class="form-input" id="scripts" rows="6" style="resize: none;" formControlName="scripts"></textarea>
+        <div class="error-group" *ngIf="scripts.invalid && (scripts.dirty || scripts.touched)">
+          <p class="form-input-hint" *ngIf="scripts.errors?.['required']">
+            Scripts are required.
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-primary" type="submit"
+            [disabled]="settingsForm.pristine || !settingsForm.valid" [promiseBtn]="btnPromise">Update</button>
+      </div>
+
+  </form>
+
+</div>

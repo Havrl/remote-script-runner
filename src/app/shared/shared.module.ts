@@ -5,11 +5,28 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { PageNotFoundComponent } from './components/';
 import { WebviewDirective } from './directives/';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Angular2PromiseButtonModule } from 'angular2-promise-buttons';
 
 @NgModule({
   declarations: [PageNotFoundComponent, WebviewDirective],
-  imports: [CommonModule, TranslateModule, FormsModule],
-  exports: [TranslateModule, WebviewDirective, FormsModule]
+  imports: [
+    CommonModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    Angular2PromiseButtonModule.forRoot({
+      spinnerTpl:
+        '<img src="assets/icons/loading.gif" class="progress-indicator">',
+      handleCurrentBtnOnly: true,
+    }),
+  ],
+  exports: [
+    TranslateModule,
+    WebviewDirective,
+    FormsModule,
+    ReactiveFormsModule,
+    Angular2PromiseButtonModule
+  ],
 })
 export class SharedModule {}

@@ -1,7 +1,51 @@
 <div class="container">
-  <h1 class="title">
-    {{ 'PAGES.HOME.TITLE' | translate }}
-  </h1>
+  <h4 class="title">Runner</h4>
 
-  <a routerLink="/detail">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+  <form [formGroup]="requestForm" (ngSubmit)="sendRequest()" novalidate>
+
+    <div class="form-group" [ngClass]="{'has-error': docNum.invalid && (docNum.dirty || docNum.touched)}">
+      <label class="form-label" for="scriptName">Script</label>
+      <select class="form-select" id="scriptName" formControlName="scriptName">
+        <option [ngValue]="null">Select...</option>
+        <option *ngFor="let s of settings?.scripts" [ngValue]="s.name">{{ s.desc }}</option>
+      </select>
+      <div class="error-group" *ngIf="scriptName.invalid && (scriptName.dirty || scriptName.touched)">
+        <p class="form-input-hint" *ngIf="scriptName.errors?.['required']">
+          Script should be selected.
+        </p>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-error': docNum.invalid && (docNum.dirty || docNum.touched)}">
+      <label class="form-label" for="docNum">Doc Number</label>
+
+      <div class="input-group">
+        <span class="input-group-addon">DOC-</span>
+        <input type="text" class="form-input" id="docNum" formControlName="docNum" />
+        <button class="btn btn-primary input-group-btn" type="submit"
+          [disabled]="requestForm.pristine || !requestForm.valid" [promiseBtn]="requestBtnPromise">Run</button>
+      </div>
+      <div class="error-group" *ngIf="docNum.invalid && (docNum.dirty || docNum.touched)">
+        <p class="form-input-hint" *ngIf="docNum.errors?.['required']">
+          Doc Number is required.
+        </p>
+        <p class="form-input-hint" *ngIf="docNum.errors?.['maxlength']">
+          Doc Number must be at most 6 digits long.
+        </p>
+        <p class="form-input-hint" *ngIf="docNum.errors?.['pattern']">
+          Doc Number can have only digits.
+        </p>
+      </div>
+    </div>
+  </form>
+
+  <div class="form-group">
+    <div class="log-title"><label class="form-label" for="output">Log</label> <button class="btn btn-link btn-sm"
+        (click)="clearOutput()">clear</button></div>
+    <textarea class="form-input log-output" id="output" rows="6" style="resize: none;" [value]="output.join('\n')"
+      readonly></textarea>
+  </div>
+</div>
+<div class="footer">
+  <span class="text-muted text-small"><strong>Server:</strong> {{ settings?.serverName }} | <strong>Path:</strong> {{ settings?.scriptsPath }}</span>
 </div>

@@ -1,7 +1,11 @@
 {
-  "name": "angular-electron",
-  "version": "10.5.0",
+  "name": "script-runner",
+  "version": "1.0.0",
+  "description": "Script runner",
+  "author": "Sergey Kosik",
   "main": "main.js",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "electron-json-storage": "4.5.0"
+  }
 }
