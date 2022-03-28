@@ -40,16 +40,16 @@ test.describe('Check Home Page', async () => {
     expect(windowState.isCrashed).toBeFalsy();
   });
 
-  // test('Check Home Page design', async ({ browserName}) => {
-  //   // Uncomment if you change the design of Home Page in order to create a new screenshot
-  //   const screenshot = await firstWindow.screenshot({ path: '/tmp/home.png' });
-  //   expect(screenshot).toMatchSnapshot(`home-${browserName}.png`);
-  // });
+  test('Check Home Page design', async ({ browserName}) => {
+     // Uncomment if you change the design of Home Page in order to create a new screenshot
+     const screenshot = await firstWindow.screenshot({ path: '/tmp/home.png' });
+     expect(screenshot).toMatchSnapshot(`home-${browserName}.png`);
+   });
 
   test('Check title', async () => {
-    const elem = await firstWindow.$('app-home h1');
+    const elem = await firstWindow.$('app-home h4');
     const text = await elem.innerText();
-    expect(text).toBe('App works !');
+    expect(text).toBe('Runner');
   });
 
   test.afterAll( async () => {
