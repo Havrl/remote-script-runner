@@ -98,6 +98,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.username.setValidators(!isDisabled ? Validators.required : null);
     this.password.setValidators(!isDisabled ? Validators.required : null);
+    this.username.updateValueAndValidity();
+    this.password.updateValueAndValidity();
+    this.requestForm.updateValueAndValidity();
   }
 
   clearOutput() {
@@ -119,7 +122,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       password: formModel.withCredentials ? formModel.password : ''
     };
 
-    console.log('sendRequest', data);
+    // console.log('sendRequest', data);
 
     await this.electronService.ipcRenderer.invoke(
       'send-request',

@@ -88,5 +88,8 @@
   },
   "browserslist": [
     "chrome 98"
-  ]
+  ],
+  "build": {
+
+  }
 }

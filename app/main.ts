@@ -27,7 +27,7 @@ function createWindow(): BrowserWindow {
       allowRunningInsecureContent: serve ? true : false,
       contextIsolation: false, // false if you want to run e2e test with Spectron
     },
-    resizable: false,
+    resizable: true,
   });
 
   if (serve) {
@@ -265,7 +265,7 @@ ipcMain.handle('send-request', async (event, data) => {
   await runCmd(
     'psexec',
     [
-      `-nobanner${ data.username ? ' -u ' + data.username + ' -p' + data.password : '' } \\\\${settings.serverName} ${settings.scriptsPath}\\${data.script} ${data.docNum}`,
+      `-nobanner${ data.username ? ' -i -u ' + data.username + ' -p ' + data.password : '' } \\\\${settings.serverName} ${settings.scriptsPath}\\${data.script} ${data.docNum}`,
     ],
     null
   );
