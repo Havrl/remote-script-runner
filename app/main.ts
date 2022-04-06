@@ -27,7 +27,7 @@ function createWindow(): BrowserWindow {
       allowRunningInsecureContent: serve ? true : false,
       contextIsolation: false, // false if you want to run e2e test with Spectron
     },
-    resizable: true,
+    resizable: serve ? true :false,
   });
 
   if (serve) {
