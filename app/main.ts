@@ -103,10 +103,10 @@ function loadSettings() {
     if (error) throw error;
 
     settings = data;
-    console.log('loadSettings', settings);
+    // console.log('loadSettings', settings);
 
     if (JSON.stringify(settings) === '{}') {
-      console.log('settings not found -> creating...');
+      // console.log('settings not found -> creating...');
       saveDefaultSettings();
     }
   });
@@ -199,7 +199,7 @@ function setMainMenu() {
             dialog.showMessageBox({
               title: 'About Script Runner',
               type: 'info',
-              message: 'Script Runner v1.0.0 - 2022.\r\n',
+              message: 'Script Runner v1.0.1 - 2022.\r\n',
             });
           },
         },
@@ -230,7 +230,7 @@ async function runCmd(command, args, callback) {
   child.stdout.on('data', (data) => {
     //Here is the output
     output = data.toString();
-    console.log(output);
+    // console.log(output);
   });
 
   child.stderr.setEncoding('utf8');
@@ -238,7 +238,7 @@ async function runCmd(command, args, callback) {
     // Return some data to the renderer process with the mainprocess-response ID
     win.webContents.send('cmd-output', data);
     //Here is the output from the command
-    console.log(data);
+    // console.log(data);
   });
 
   child.on('close', (code) => {
@@ -260,7 +260,7 @@ async function runCmd(command, args, callback) {
 }
 
 ipcMain.handle('send-request', async (event, data) => {
-  console.log('handle send-request', data, settings);
+  // console.log('handle send-request', data, settings);
 
   await runCmd(
     'psexec',
@@ -272,13 +272,13 @@ ipcMain.handle('send-request', async (event, data) => {
 });
 
 ipcMain.on('load-settings', (event, data) => {
-  console.log('handle load settings', data, settings);
+  // console.log('handle load settings', data, settings);
 
   event.sender.send('load-settings-resp', settings);
 });
 
 ipcMain.on('update-settings', (event, data) => {
-  console.log('handle update settings', data);
+  // console.log('handle update settings', data);
 
   storage.set('settings', data, (err) => {
     let status = 'success';
