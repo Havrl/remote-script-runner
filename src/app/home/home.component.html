@@ -3,20 +3,51 @@
 
   <form [formGroup]="requestForm" (ngSubmit)="sendRequest()" novalidate>
 
-    <div class="form-group" [ngClass]="{'has-error': docNum.invalid && (docNum.dirty || docNum.touched)}">
-      <label class="form-label" for="scriptName">Script</label>
-      <select class="form-select" id="scriptName" formControlName="scriptName">
-        <option [ngValue]="null">Select...</option>
-        <option *ngFor="let s of settings?.scripts" [ngValue]="s.name">{{ s.desc }}</option>
-      </select>
-      <div class="error-group" *ngIf="scriptName.invalid && (scriptName.dirty || scriptName.touched)">
-        <p class="form-input-hint" *ngIf="scriptName.errors?.['required']">
-          Script should be selected.
-        </p>
+    <div class="columns col-gapless">
+      <div class="column col-5">
+        <div class="form-group" [ngClass]="{'has-error': docNum.invalid && (docNum.dirty || docNum.touched)}">
+          <label class="form-label" for="scriptName">Script</label>
+          <select class="form-select" id="scriptName" formControlName="scriptName">
+            <option [ngValue]="null">Select...</option>
+            <option *ngFor="let s of settings?.scripts" [ngValue]="s.name">{{ s.desc }}</option>
+          </select>
+          <div class="error-group" *ngIf="scriptName.invalid && (scriptName.dirty || scriptName.touched)">
+            <p class="form-input-hint" *ngIf="scriptName.errors?.['required']">
+              Script should be selected.
+            </p>
+          </div>
+        </div>
       </div>
+      <div class="column col-5 col-ml-auto">
+
+        <div class="form-group" [ngClass]="{'has-error': username.invalid && (username.dirty || username.touched)}">
+          <label class="form-checkbox">
+            <input type="checkbox" formControlName="withCredentials">
+            <i class="form-icon"></i> Provide Credentials
+          </label>
+          <input type="text" class="form-input" id="username" formControlName="username"
+            placeholder="Domain\username" />
+          <div class="error-group" *ngIf="username.invalid && (username.dirty || username.touched)">
+            <p class="form-input-hint" *ngIf="username.errors?.['required']">
+              Username is required
+            </p>
+          </div>
+        </div>
+
+        <div class="form-group" [ngClass]="{'has-error': password.invalid && (password.dirty || password.touched)}">
+          <input type="password" class="form-input" id="password" formControlName="password" placeholder="Password" />
+          <div class="error-group" *ngIf="password.invalid && (password.dirty || password.touched)">
+            <p class="form-input-hint" *ngIf="password.errors?.['required']">
+              Password is required
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column col-1"></div>
     </div>
 
-    <div class="form-group" [ngClass]="{'has-error': docNum.invalid && (docNum.dirty || docNum.touched)}">
+
+    <div class="form-group w-60" [ngClass]="{'has-error': docNum.invalid && (docNum.dirty || docNum.touched)}">
       <label class="form-label" for="docNum">Doc Number</label>
 
       <div class="input-group">
@@ -47,5 +78,6 @@
   </div>
 </div>
 <div class="footer">
-  <span class="text-muted text-small"><strong>Server:</strong> {{ settings?.serverName }} | <strong>Path:</strong> {{ settings?.scriptsPath }}</span>
+  <span class="text-muted text-small"><strong>Server:</strong> {{ settings?.serverName }} | <strong>Path:</strong> {{
+    settings?.scriptsPath }}</span>
 </div>

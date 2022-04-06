@@ -265,7 +265,7 @@ ipcMain.handle('send-request', async (event, data) => {
   await runCmd(
     'psexec',
     [
-      `-nobanner \\\\${settings.serverName} ${settings.scriptsPath}\\${data.script} ${data.docNum}`,
+      `-nobanner${ data.username ? ' -u ' + data.username + ' -p' + data.password : '' } \\\\${settings.serverName} ${settings.scriptsPath}\\${data.script} ${data.docNum}`,
     ],
     null
   );

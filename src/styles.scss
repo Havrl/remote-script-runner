@@ -32,7 +32,7 @@ html, body {
 }
 
 form {
-  max-width: 350px;
+  // max-width: 350px;
 }
 
 .title {
@@ -111,4 +111,8 @@ button {
   max-height: 100px;
   overflow-y: auto;
   font-size: 16px;
+}
+
+.w-60 {
+  width: 60%;
 }
