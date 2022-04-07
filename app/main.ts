@@ -21,7 +21,7 @@ function createWindow(): BrowserWindow {
     x: 0,
     y: 0,
     width: 600, // size.width,
-    height: 650, //size.height,
+    height: 600, //size.height,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
@@ -199,7 +199,7 @@ function setMainMenu() {
             dialog.showMessageBox({
               title: 'About Script Runner',
               type: 'info',
-              message: 'Script Runner v1.0.2 - 2022.\r\n',
+              message: 'Script Runner (server version) v1.0.4 - 2022.\r\n',
             });
           },
         },
@@ -261,18 +261,18 @@ async function runCmd(command, args, callback) {
 
 ipcMain.handle('send-request', async (event, data) => {
 
-  const psExec = settings.psExecPath ? `${settings.psExecPath.replace(/\\$/, '')}\\psexec` : 'psexec';
+  // const psExec = settings.psExecPath ? `${settings.psExecPath.replace(/\\$/, '')}\\psexec` : 'psexec';
   // console.log('handle send-request', data, settings, psExec);
 
   await runCmd(
-    /* `${settings.scriptsPath}\\${data.script}`,
+    `${settings.scriptsPath}\\${data.script}`,
     [
       `${data.docNum}`
-    ], */
-    psExec,
+    ],
+    /*psExec,
     [
       `-nobanner${ data.username ? ' -i -u ' + data.username + ' -p ' + data.password : '' } \\\\${settings.serverName} ${settings.scriptsPath}\\${data.script} ${data.docNum}`,
-    ],
+    ],*/
     null
   );
 });
