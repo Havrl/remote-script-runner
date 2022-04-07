@@ -8,6 +8,12 @@
 
   <form [formGroup]="settingsForm" (ngSubmit)="save()" novalidate>
 
+    <div class="form-group">
+      <label class="form-label" for="psExecPath">PsExec Path</label>
+      <input type="text" class="form-input" id="psExecPath" formControlName="psExecPath" />
+      <p class="text-small mb-0">If empty then assumed the path to PsExec is added to executable path.</p>
+    </div>
+
       <div class="form-group" [ngClass]="{'has-error': serverName.invalid && (serverName.dirty || serverName.touched)}">
         <label class="form-label" for="serverName">Server name</label>
         <input type="text" class="form-input" id="serverName" formControlName="serverName" />

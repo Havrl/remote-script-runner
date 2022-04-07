@@ -64,6 +64,7 @@ export class SettingsComponent implements OnInit {
       serverName: ['', [Validators.required, Validators.maxLength(50)]],
       scriptsPath: ['', Validators.required],
       scripts: ['', Validators.required],
+      psExecPath: ''
     });
   }
 
@@ -72,6 +73,7 @@ export class SettingsComponent implements OnInit {
       serverName: this.settings.serverName,
       scriptsPath: this.settings.scriptsPath,
       scripts: this.stringifyScripts(this.settings.scripts),
+      psExecPath: this.settings.psExecPath
     });
     this.settingsForm.updateValueAndValidity();
   }
@@ -146,6 +148,7 @@ export class SettingsComponent implements OnInit {
       serverName: formModel.serverName,
       scriptsPath: formModel.scriptsPath,
       scripts: scripts,
+      psExecPath: formModel.psExecPath
     };
 
     console.log('save settings', data);
