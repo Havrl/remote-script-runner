@@ -73,6 +73,7 @@ The application code is managed by `app/main.ts`. In this sample, the app runs w
 The Angular component contains an example of Electron and NodeJS native lib import. \
 You can disable "Developer Tools" by commenting `win.webContents.openDevTools();` in `app/main.ts`.
 
+
 ## Project structure
 
 | Folder | Description                                      |
